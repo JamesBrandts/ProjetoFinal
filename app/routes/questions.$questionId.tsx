@@ -22,8 +22,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const sortedAlternativas = alternativas
     .map((alternativa, index) => ({ alternativa, value: values[index] }))
     .sort((a, b) => a.value - b.value)
-    .map(({ alternativa }) => alternativa);
-    
+    .map(({ alternativa }) => alternativa);    
   const outQuestion = {
     id: question.id,
     question: question.question,
@@ -31,7 +30,6 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     alternativaB: sortedAlternativas[1],
     alternativaC: sortedAlternativas[2],
     alternativaD: sortedAlternativas[3],
-    correctAnswer: values[0]
   };
   return json({ question: outQuestion });
 };
@@ -62,7 +60,6 @@ export default function QuestionDetailsPage() {
             <Alternative text={`${data.question.alternativaB}`} alternativa="b" />
             <Alternative text={`${data.question.alternativaC}`} alternativa="c" />
             <Alternative text={`${data.question.alternativaD}`} alternativa="d" /> 
-            <input type="hidden" name="correctAnswer" value={data.question.correctAnswer} />      
         </Form>
       </div>
     </div>
