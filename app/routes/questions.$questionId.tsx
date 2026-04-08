@@ -3,6 +3,8 @@ import { json, redirect } from "@remix-run/node";
 import {
   Form,
   isRouteErrorResponse,
+  Outlet,
+  useActionData,
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
@@ -36,11 +38,16 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const title = formData.get("alternativa");
   const userId = await requireUserId(request);
-  const alternativa = formData.get("alternativa");
-  console.log("Alternativa: ", title);
+  const alternativa = formData.get("alternativa");  
   invariant(params.questionId, "questionId not found");
+  const question = await getQuestion({ id: params.questionId });
+  if (!question) {
+    throw new Response("Not Found", { status: 404 });  }
+  if (alternativa !== question.alternativaA) {
+    return json({ correct: false, base: question.base });
+  }
+  console.log("base:", question.base);
   const questionsList = await getQuestionListItems();
   const randomIndex = Math.floor(Math.random() * questionsList.length);
   const randomQuestion = questionsList[randomIndex];
@@ -49,6 +56,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
 export default function QuestionDetailsPage() {
   const data = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
+  const wrong = (actionData && actionData.correct === false) || false;
   return (
     <div className="w-full p-4">
       <div className="flex flex-col gap-4 w-full max-w-md mx-auto p-4 border rounded shadow">
@@ -56,11 +65,17 @@ export default function QuestionDetailsPage() {
         <hr className="my-2" />
         <Form method="post"
           className="flex flex-col gap-2 w-full ">
-            <Alternative text={`${data.question.alternativaA} `} alternativa="a" />
-            <Alternative text={`${data.question.alternativaB}`} alternativa="b" />
+            <Alternative text={`${data.question.alternativaA} `} alternativa="a"/>
+            <Alternative text={`${data.question.alternativaB}`} alternativa="b"/>
             <Alternative text={`${data.question.alternativaC}`} alternativa="c" />
             <Alternative text={`${data.question.alternativaD}`} alternativa="d" /> 
         </Form>
+        <Outlet />
+        <div className="flex gap-2">
+          {actionData && actionData.base && (            
+            <p className="text-sm p-4">Base: {actionData.base}</p>
+          )}
+        </div>
       </div>
     </div>
   );
