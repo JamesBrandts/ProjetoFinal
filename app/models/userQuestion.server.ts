@@ -1,32 +1,5 @@
 import { prisma } from "~/db.server";
-/*
-export function createUserQuestion({
-    userId, questionId, correctResponse, questionText, alternativaA, alternativaB, alternativaC, alternativaD, base }: {
-        userId: string;
-        questionId: string;
-        correctResponse: string;
-        questionText: string;
-        alternativaA: string;
-        alternativaB: string;
-        alternativaC: string;
-        alternativaD: string;
-        base: string;
-    }) {
-    return prisma.userQuestion.create({
-        data: {
-            userId,
-            questionId,
-            correctResponse,
-            questionText,
-            alternativaA,
-            alternativaB,
-            alternativaC,
-            alternativaD,
-            base
-        }
-    });
-}
-*/
+
 export async function createUserQuestion({ questionId, userId }: {
     questionId: string;
     userId: string;

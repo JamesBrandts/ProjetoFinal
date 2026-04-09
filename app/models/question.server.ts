@@ -47,3 +47,7 @@ export function deleteQuestion({
     });
 }
 
+export function deleteAllQuesions(){
+    return prisma.question.deleteMany({})
+}
+
