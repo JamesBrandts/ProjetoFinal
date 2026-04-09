@@ -62,7 +62,7 @@ export default function UserQuestionRoute() {
                     {data.question.userResponse && (
                         <p className={`text-center font-bold flex flex-col ${data.question.userResponse === data.question.correctResponse ? 'text-green-600' : 'text-red-600'}`}>
                             {data.question.userResponse === data.question.correctResponse ? 'Correto!' : `Errado! A resposta correta era ${data.question.correctResponse}.`}
-                            <button className="bg-blue-600 text-white hover:bg-blue-500 px-4 py-2 rounded mt-2 w-full text-center" value="proxima" name="alternativa" type="submit">
+                            <button className="bg-slate-800 text-white hover:bg-slate-600 px-4 py-2 rounded mt-2 w-full text-center" value="proxima" name="alternativa" type="submit">
                                 Próxima pergunta
                             </button>
 
@@ -72,7 +72,7 @@ export default function UserQuestionRoute() {
 
                 {data.question.userResponse && data.question.correctResponse !== data.question.userResponse && (
                     <div className="p-4">
-                        <p className=" text-center font-bold text-blue-600">
+                        <p className=" text-center font-bold text-slate-800">
                             Conhecimento Relevante:
                         </p>
                         <div className="text-justify mt-2 text-sm">
