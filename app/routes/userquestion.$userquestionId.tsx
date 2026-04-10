@@ -70,7 +70,7 @@ export default function UserQuestionRoute() {
                     )}
                 </Form>
 
-                {data.question.userResponse && data.question.correctResponse !== data.question.userResponse && (
+                {data.question.userResponse && (
                     <div className="p-4">
                         <p className=" text-center font-bold text-slate-800">
                             Conhecimento Relevante:
@@ -84,14 +84,4 @@ export default function UserQuestionRoute() {
             </div>
         </div>
     )
-}
-
-function shuffleArray(array: any[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-        // Generate a random index from 0 to i
-        const j = Math.floor(Math.random() * (i + 1));
-        // Swap elements array[i] and array[j]
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
 }
