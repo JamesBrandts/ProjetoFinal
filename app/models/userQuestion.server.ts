@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { prisma } from "~/db.server";
 
 export async function createUserQuestion({ questionId, userId }: {
@@ -10,11 +11,11 @@ export async function createUserQuestion({ questionId, userId }: {
     if (!question) {
         throw new Error("Question not found");
     }
-    const alternativas =[
-        {correct: true, text: question.alternativaA},
-        {correct: false, text: question.alternativaB},
-        {correct: false, text: question.alternativaC},
-        {correct: false, text: question.alternativaD}
+    const alternativas = [
+        { correct: true, text: question.alternativaA },
+        { correct: false, text: question.alternativaB },
+        { correct: false, text: question.alternativaC },
+        { correct: false, text: question.alternativaD }
     ];
     const alternativasShuffled = shuffleArray(alternativas);
     const correctResponse = ["A", "B", "C", "D"][alternativasShuffled.findIndex(a => a.correct)];
@@ -55,6 +56,13 @@ export function setUserResponse({
     });
 }
 
+export function getRespondedQuestions({ userId }: { userId: User["id"] }) {
+    return prisma.userQuestion.findMany({
+        where: { userId },
+        select: { correctResponse: true, userResponse: true, updatedAt: true }
+    });
+}
+
 function shuffleArray(array: any[]) {
     let arrayCopy = [...array];
     for (let i = array.length - 1; i > 0; i--) {
@@ -65,3 +73,4 @@ function shuffleArray(array: any[]) {
     }
     return arrayCopy;
 }
+
