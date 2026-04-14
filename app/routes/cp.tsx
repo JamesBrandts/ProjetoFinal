@@ -18,7 +18,7 @@ export default function controlPannel() {
                 <h1 className="text-3xl font-bold">
                     <Link to="/userquestion">Questões</Link>
                 </h1>
-                <Link to="/cp">{user.email}</Link>
+                <Link to="/cp/pie">{user.email}</Link>
                 <Form action="/logout" method="post">
                     <button
                         type="submit"

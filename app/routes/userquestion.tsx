@@ -31,7 +31,7 @@ export default function newQuestion() {
                     <Link to=".">Questões</Link>
                 </h1>
                 <div className="flex gap-2 items-center">
-                <Link to="/cp">{user.email}</Link>
+                <Link to="/cp/pie">{user.email}</Link>
                 <Form action="/logout" method="post">
                     <button
                         type="submit"
