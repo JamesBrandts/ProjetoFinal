@@ -20,7 +20,7 @@ export const meta: MetaFunction<typeof loader> = ({
     data,
 }) => {
     return [{
-        title: data?.question?.questionText ?? "Questão",
+        title: "Questão",
         description: `Responda a questão: ${data?.question?.questionText}`
     }];
 };
