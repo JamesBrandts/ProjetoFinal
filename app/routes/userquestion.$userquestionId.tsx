@@ -20,9 +20,11 @@ export const meta: MetaFunction<typeof loader> = ({
     data,
 }) => {
     return [{
-        title: "Questão",
-        description: `Responda a questão: ${data?.question?.questionText}`
-    }];
+        title: data?.question?.questionText ?? "Questão",
+    }, {
+        name: "description",
+        content: `Responda a questão: ${data?.question?.questionText}`,
+    },];
 };
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
