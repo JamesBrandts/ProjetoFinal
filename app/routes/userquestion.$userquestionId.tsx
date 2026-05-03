@@ -1,4 +1,4 @@
-import { json, LoaderFunctionArgs, ActionFunctionArgs, redirect } from "@remix-run/node";
+import { json, LoaderFunctionArgs, ActionFunctionArgs, redirect, MetaFunction } from "@remix-run/node";
 import { Form, Link, Outlet, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Alternative from "~/components/alternative";
@@ -14,6 +14,12 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
         throw new Response("Not Found", { status: 404 });
     }
     return json({ question: userQuestion });
+};
+
+export const meta: MetaFunction<typeof loader> = ({
+  data,
+}) => {
+  return [{ title: data?.question?.questionText ?? "Questão"}];
 };
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
