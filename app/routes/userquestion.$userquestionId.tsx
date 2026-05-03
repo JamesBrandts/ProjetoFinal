@@ -55,7 +55,7 @@ export default function UserQuestionRoute() {
     const data = useLoaderData<typeof loader>();
     const base = data.question.base.split("\n").map((line: string, index: number) => <p key={index} className={`text-sm ${line.includes("@")}`}>{line.replaceAll("@","")}</p>);
     return (
-        <div className="w-full p-4">
+        <div className="w-full p-4"  role="main">
             <div className="flex flex-col gap-4 w-full max-w-md mx-auto p-4 border rounded shadow">
                 <p className="p-4">{data.question.questionText}</p>
                 <hr className="my-2" />

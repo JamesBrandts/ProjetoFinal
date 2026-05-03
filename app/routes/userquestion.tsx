@@ -26,7 +26,7 @@ export default function newQuestion() {
     const user = data.user;
     return (
         <div className="flex h-full min-h-screen flex-col">
-            <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
+            <header className="flex items-center justify-between bg-slate-800 p-4 text-white"  role="navigation">
                 <h1 className="text-2xl sm:text-3xl font-bold">
                     <Link to=".">Questões</Link>
                 </h1>
